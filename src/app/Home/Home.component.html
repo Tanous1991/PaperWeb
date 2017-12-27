@@ -1,0 +1,35 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <label>Mot clé a recherche</label>
+  <br>
+  <input type="text" [(ngModel)]="mot">
+  <button (click)="search()">Rechercher</button>
+</div>
+<div style="text-align:center">
+  <table style="width:100%" BORDER="2">
+    <thead>
+      <th>Titre</th>
+      <th>authors</th>
+      <th>Année</th>
+      <th></th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let pap  of papers">
+        <td>{{pap.title}}</td>
+        <td>
+          <table>
+            <tr *ngFor="let auth of pap.authors">
+              <td>
+                {{auth.name}}
+              </td>
+            </tr>
+          </table>
+        </td>
+        <td>{{pap.year}}</td>
+        <td>
+          <button (click)="detail(pap._id)">Plus de details</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
