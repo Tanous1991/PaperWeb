@@ -53,13 +53,12 @@ export class HomeComponent implements OnInit {
       });
       inCitationsT = inCitations.split(",");
       outCitationsT = outCitations.split(",");
-
       //get inCitations
       inCitationsT.forEach(element => {
         if (element != "") {
           this.PaperService.getPaperById(element).subscribe(resData => temp = resData);
           setTimeout(() => {
-            if (temp != null{
+            if (temp != null){
               inCitationsTabTemp.push(temp);
             }
           }, 500);
@@ -72,7 +71,7 @@ export class HomeComponent implements OnInit {
         if (element != "") {
           this.PaperService.getPaperById(element).subscribe(resData => temp = resData);
           setTimeout(() => {
-            if (temp != null{
+            if (temp != null){
               outCitationsTabTemp.push(temp);
             }
           }, 500);
