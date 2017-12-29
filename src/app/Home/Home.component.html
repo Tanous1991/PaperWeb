@@ -87,7 +87,7 @@
               <tbody>
                 <tr *ngFor="let pap  of papers">
                   <td>
-                    <a (click)="detail(pap._id)">{{pap.title}}</a>
+                    <a (click)="detail(pap.id)">{{pap.title}}</a>
                   </td>
                   <td>{{pap.score*100| number : '1.2-2'}}%</td>
                 </tr>
@@ -115,11 +115,10 @@
                 <th>Score</th>
               </thead>
               <tbody>
-                <tr *ngFor="">
+                <tr *ngFor="let pap  of inCitationsTab">
                   <td>
                     <a>{{pap.title}}</a>
                   </td>
-                  <td>{{pap.score*100| number : '1.2-2'}}%</td>
                 </tr>
               </tbody>
             </table>
@@ -143,7 +142,6 @@
                   <td>
                     <a>{{pap.title}}</a>
                   </td>
-                  <td>{{pap.score*100| number : '1.2-2'}}%</td>
                 </tr>
               </tbody>
             </table>

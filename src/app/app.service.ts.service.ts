@@ -11,7 +11,7 @@ export class PaperService {
 
     getPaper() {
         return this.http.get(this.url)
-            .map((res: Response) => <any[]> res.json());
+            .map((res: Response) => <any[]>res.json());
     }
 
     searchPaper(mot: String) {
@@ -21,12 +21,12 @@ export class PaperService {
         let options = new RequestOptions({ headers: headers });
 
         return this.http.post(this.url, JSON.stringify(mot), options)
-            .map((res: Response) => <any[]> res.json());
+            .map((res: Response) => <any[]>res.json());
     }
 
-    getPaperById(id: Number) {
-        return this.http.get(this.url+"/"+id)
-            .map((res: Response) => <any> res.json());
+    getPaperById(id: String) {
+        return this.http.get(this.url + "/" + id)
+            .map((res: Response) => <any>res.json());
     }
 
 }

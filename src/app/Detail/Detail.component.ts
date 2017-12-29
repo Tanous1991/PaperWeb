@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 export class DetailComponent implements OnInit {
 
   paper: any ;
-  id: Number;
+  id: String;
 
   constructor(private route: ActivatedRoute,
     private PaperService: PaperService) { }
