@@ -15,13 +15,12 @@ export class PaperService {
     }
 
     searchPaper(mot: String) {
-        console.log(mot)
         var headers = new Headers();
         headers.append("Accept", 'application/json');
         headers.append('Content-Type', 'application/json');
         let options = new RequestOptions({ headers: headers });
 
-        return this.http.post(this.url, mot,options)
+        return this.http.post(this.url, JSON.stringify(mot), options)
             .map((res: Response) => <any[]> res.json());
     }
 

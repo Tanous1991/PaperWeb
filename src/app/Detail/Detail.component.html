@@ -1,17 +1,21 @@
-<H3>
-    {{paper.title}}
-</H3>
-<table>
-    <tr>
-        <td>Auteur:</td>
-    </tr>
-    <tr *ngFor="let auth of paper.authors">
-        <td>
-            - {{auth.name}}
-        </td>
-    </tr>
-</table>
-<p>Abstract :</p>
-<p>{{paper.paperAbstract}}</p>
+<div class="container">
+    <H3>
+        {{paper.title}}
+    </H3>
+    <table>
+        <tr>
+            <td>Auteur:</td>
+        </tr>
+        <tr *ngFor="let auth of paper.authors">
+            <td>
+                - {{auth.name}}
+            </td>
+        </tr>
+    </table>
+    <p>Abstract :</p>
+    <p>{{paper.paperAbstract}}</p>
 
-<p><a href="{{paper.s2Url}}">lien de l'article</a></p>
+    <p>
+        <a href="{{paper.s2Url}}">lien de l'article</a>
+    </p>
+</div>
