@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class PaperService {
@@ -9,12 +10,12 @@ export class PaperService {
 
     constructor(private http: Http) { }
 
-    getPaper() {
+    getPaper():Observable<any[]> {
         return this.http.get(this.url)
             .map((res: Response) => <any[]>res.json());
     }
 
-    searchPaper(mot: String) {
+    searchPaper(mot: String):Observable<any[]> {
         var headers = new Headers();
         headers.append("Accept", 'application/json');
         headers.append('Content-Type', 'application/json');
@@ -24,7 +25,7 @@ export class PaperService {
             .map((res: Response) => <any[]>res.json());
     }
 
-    getPaperById(id: String) {
+    getPaperById(id: String):Observable<any[]> {
         return this.http.get(this.url + "/" + id)
             .map((res: Response) => <any>res.json());
     }

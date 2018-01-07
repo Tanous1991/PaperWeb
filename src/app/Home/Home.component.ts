@@ -36,48 +36,6 @@ export class HomeComponent implements OnInit {
 
   search() {
     var motJson = JSON.parse('{"search":"' + this.mot + '"}');
-    var temp;
-    var TextslimTab: any[] = [];
-    var outCitationsTabTemp: any[] = [];
-    var inCitationsTabTemp: any[] = [];
-    var inCitations: String = "";
-    var outCitations: String = "";
-    var inCitationsT: String[] = [];
-    var outCitationsT: String[] = [];
-    this.PaperService.searchPaper(motJson).subscribe(resData => TextslimTab = resData);
-    setTimeout(() => {
-      this.papers = TextslimTab;
-      TextslimTab.forEach(element => {
-        inCitations = inCitations + "," + element.outCitations;
-        outCitations = outCitations + "," + element.inCitations;
-      });
-      inCitationsT = inCitations.split(",");
-      outCitationsT = outCitations.split(",");
-      //get inCitations
-      inCitationsT.forEach(element => {
-        if (element != "") {
-          this.PaperService.getPaperById(element).subscribe(resData => temp = resData);
-          setTimeout(() => {
-            if (temp != null){
-              inCitationsTabTemp.push(temp);
-            }
-          }, 500);
-        }
-        this.inCitationsTab = inCitationsTabTemp;
-      });
-
-      //get outCitations
-      outCitationsT.forEach(element => {
-        if (element != "") {
-          this.PaperService.getPaperById(element).subscribe(resData => temp = resData);
-          setTimeout(() => {
-            if (temp != null){
-              outCitationsTabTemp.push(temp);
-            }
-          }, 500);
-        }
-        this.outCitationsTab = outCitationsTabTemp;
-      });
-    }, 1000);
+    this.PaperService.searchPaper(motJson).subscribe(resData => this.papers = resData);
   }
 }
