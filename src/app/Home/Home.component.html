@@ -47,12 +47,10 @@
                     <option value="1000">1000</option>
                   </select>
                 </div>
-                <!-- form group [rows] -->
                 <div class="form-group">
                   <label class="filter-col" style="margin-right:0;" for="pref-search">Years:</label>
                   <input type="text" class="form-control input-sm" id="pref-search">
                 </div>
-                <!-- form group [search] -->
                 <div class="form-group">
                   <label class="filter-col" style="margin-right:0;" for="pref-orderby">Order by:</label>
                   <select id="pref-orderby" class="form-control">
@@ -66,19 +64,19 @@
       </div>
     </div>
   </div>
-  <div class="panel panel-default">
+  <div class="panel panel-default" *ngIf="view">
     <div class="panel-body">
       <div class="card">
-        <!--<div class="card-header">
+        <div class="card-header">
           <span class="icon-list icons font-2xl d-block mt-4">
             &nbsp;
-            <label>Text Sim</label>
+            <label>Resultat</label>
           </span>
-        </div>-->
+        </div>
         <div class="card-body">
-          <table class="table table-bordered table-hover">
+          <table class="table">
             <thead>
-              <th>Titre</th>
+              <th scope="col">Titre</th>
               <th>Score</th>
             </thead>
             <tbody>

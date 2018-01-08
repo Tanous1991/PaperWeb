@@ -24,9 +24,15 @@
         </div>
     </div>
 
-    <div class="panel panel-default">
+    <div class="panel panel-default" *ngIf="tab1">
         <div class="panel-body">
             <div class="card">
+                <div class="card-header">
+                    <span class="icon-list icons font-2xl d-block mt-4">
+                        &nbsp;
+                        <label>InCitation List</label>
+                    </span>
+                </div>
                 <div class="card-body">
                     <table class="table table-bordered table-hover">
                         <thead>
@@ -34,7 +40,7 @@
                             <th>Score</th>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let pap  of papers">
+                            <tr *ngFor="let pap  of inCitations">
                                 <td>
                                     <a (click)="detail(pap.id)">{{pap.title}}</a>
                                 </td>
@@ -46,4 +52,33 @@
             </div>
         </div>
     </div>
+
+    <div class="panel panel-default" *ngIf="tab1">
+            <div class="panel-body">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="icon-list icons font-2xl d-block mt-4">
+                            &nbsp;
+                            <label>OutCitation List</label>
+                        </span>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <th>Titre</th>
+                                <th>Score</th>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let pap  of outCitations">
+                                    <td>
+                                        <a (click)="detail(pap.id)">{{pap.title}}</a>
+                                    </td>
+                                    <td>{{pap.score*100| number : '1.2-2'}}%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
 </div>

@@ -11,8 +11,11 @@ import { Observable } from 'rxjs/Observable';
 })
 export class DetailComponent implements OnInit {
 
-  paper: any ;
-  papers : any[] ;
+  paper: any;
+  inCitations: any[];
+  outCitations: any[];
+  tab1: boolean = false;
+  tab2: boolean = false;
   id: String;
 
   constructor(private route: ActivatedRoute,
@@ -21,27 +24,33 @@ export class DetailComponent implements OnInit {
   async ngOnInit() {
     this.route.params.subscribe(res => this.id = res.id);
     await this.getId();
-    console.log(this.paper);
     await this.getinCitations(this.paper);
-    //console.log("papers length : "+this.papers.length);
+    await this.getoutCitations(this.paper);
+    if (this.inCitations.length > 0) {
+      this.tab1 = true;
+    }
+    if (this.outCitations.length > 0) {
+      this.tab2 = true;
+    }
   }
 
-  async getId(){
-    await this.PaperService.getPaperById(this.id).then(resData => this.paper = resData );
+  async getId() {
+    await this.PaperService.getPaperById(this.id).then(resData => this.paper = resData);
   }
 
-  async getinCitations(temp : any){
-    var inCitations:any[];
-    var inCitationstab : any[] = temp.inCitations;
-    console.log(inCitationstab);
-    var listJson = JSON.stringify({inCitationstab});
-    console.log(listJson);
-    await this.PaperService.getPaper(listJson).then(resData => this.papers = resData );
+  async getinCitations(temp: any) {
+    console.log("getinCitations");
+    var inCitationstab: String = temp.inCitations;
+    console.log("inCitationstab = " + inCitationstab);
+    await this.PaperService.getPaper(inCitationstab).then(resData => this.inCitations = resData);
+    console.log("inCitations = " + this.inCitations.length);
   }
 
-  getoutCitations(){
-    var outCitations:String[]= this.paper.outCitations;
-    console.log(outCitations);
+  async getoutCitations(temp: any) {
+    console.log("getoutCitations");
+    var outCitationstab: String = temp.outCitations;
+    console.log("outCitationstab = " + outCitationstab);
+    await this.PaperService.getPaper(outCitationstab).then(resData => this.outCitations = resData);
+    console.log("outCitations = " + this.outCitations.length);
   }
-
 }

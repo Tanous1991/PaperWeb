@@ -1,3 +1,4 @@
+import { async } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { PaperService } from './../app.service.ts.service';
 import { Component, OnInit } from '@angular/core';
@@ -12,10 +13,9 @@ export class HomeComponent implements OnInit {
 
   show = false;
   papers: any[] = [];
-  outCitationsTab: any[] = [];
-  inCitationsTab: any[] = [];
   title = 'app';
   mot: String;
+  view : boolean = false ;
 
   constructor(private PaperService: PaperService,
     private router: Router) { }
@@ -27,8 +27,10 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['detail/' + id]);
   }
 
-  search() {
-    var motJson = JSON.parse('{"search":"' + this.mot + '"}');
-    this.PaperService.searchPaper(motJson).then(resData => this.papers = resData);
+  async search() {
+    await this.PaperService.searchPaper(this.mot).then(resData => this.papers = resData);
+    if(this.papers.length > 0){
+      this.view = true;
+    }
   }
 }

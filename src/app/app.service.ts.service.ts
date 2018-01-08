@@ -16,18 +16,18 @@ export class PaperService {
         headers.append('Content-Type', 'application/json');
         let options = new RequestOptions({ headers: headers });
 
-        return this.http.post(this.url+"/list", JSON.stringify(list), options)
+        return this.http.post(this.url+"/list", JSON.stringify({list}), options)
             .map((res: Response) => <any[]>res.json())
             .toPromise();
     }
 
-    searchPaper(mot: String):Promise<any[]> {
+    searchPaper(search: String):Promise<any[]> {
         var headers = new Headers();
         headers.append("Accept", 'application/json');
         headers.append('Content-Type', 'application/json');
         let options = new RequestOptions({ headers: headers });
 
-        return this.http.post(this.url, JSON.stringify(mot), options)
+        return this.http.post(this.url, JSON.stringify({search}), options)
             .map((res: Response) => <any[]>res.json())
             .toPromise();
     }
