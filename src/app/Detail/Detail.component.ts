@@ -1,6 +1,8 @@
+import { forEach } from '@angular/router/src/utils/collection';
 import { PaperService } from './../app.service.ts.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-Detail',
@@ -10,21 +12,36 @@ import { ActivatedRoute } from '@angular/router';
 export class DetailComponent implements OnInit {
 
   paper: any ;
+  papers : any[] ;
   id: String;
 
   constructor(private route: ActivatedRoute,
     private PaperService: PaperService) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.route.params.subscribe(res => this.id = res.id);
-    this.getId();
-    setTimeout(() => {
-      console.log("List Societe" , this.paper);
-    }, 1000);
+    await this.getId();
+    console.log(this.paper);
+    await this.getinCitations(this.paper);
+    //console.log("papers length : "+this.papers.length);
   }
 
-  getId(){
-    this.PaperService.getPaperById(this.id).subscribe(resData => this.paper = resData);
+  async getId(){
+    await this.PaperService.getPaperById(this.id).then(resData => this.paper = resData );
+  }
+
+  async getinCitations(temp : any){
+    var inCitations:any[];
+    var inCitationstab : any[] = temp.inCitations;
+    console.log(inCitationstab);
+    var listJson = JSON.stringify({inCitationstab});
+    console.log(listJson);
+    await this.PaperService.getPaper(listJson).then(resData => this.papers = resData );
+  }
+
+  getoutCitations(){
+    var outCitations:String[]= this.paper.outCitations;
+    console.log(outCitations);
   }
 
 }

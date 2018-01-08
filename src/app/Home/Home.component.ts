@@ -23,19 +23,12 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
-  get() {
-    this.PaperService.getPaper().subscribe(resData => this.papers = resData);
-    setTimeout(() => {
-      console.log("List Papers", this.papers);
-    }, 5000);
-  }
-
   detail(id: Number) {
     this.router.navigate(['detail/' + id]);
   }
 
   search() {
     var motJson = JSON.parse('{"search":"' + this.mot + '"}');
-    this.PaperService.searchPaper(motJson).subscribe(resData => this.papers = resData);
+    this.PaperService.searchPaper(motJson).then(resData => this.papers = resData);
   }
 }

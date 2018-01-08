@@ -1,21 +1,49 @@
 <div class="container">
-    <H3>
-        {{paper.title}}
-    </H3>
-    <table>
-        <tr>
-            <td>Auteur:</td>
-        </tr>
-        <tr *ngFor="let auth of paper.authors">
-            <td>
-                - {{auth.name}}
-            </td>
-        </tr>
-    </table>
-    <p>Abstract :</p>
-    <p>{{paper.paperAbstract}}</p>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="card">
+                <H3>
+                    {{paper.title}}
+                </H3>
+                <table>
+                    <tr>
+                        <td>Auteur:</td>
+                    </tr>
+                    <tr *ngFor="let auth of paper.authors">
+                        <td>
+                            - {{auth.name}}
+                        </td>
+                    </tr>
+                </table>
+                <p>Abstract :</p>
+                <p>{{paper.paperAbstract}}</p>
+                <p>
+                    <a href="{{paper.s2Url}}">lien de l'article</a>
+                </p>
+            </div>
+        </div>
+    </div>
 
-    <p>
-        <a href="{{paper.s2Url}}">lien de l'article</a>
-    </p>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <th>Titre</th>
+                            <th>Score</th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let pap  of papers">
+                                <td>
+                                    <a (click)="detail(pap.id)">{{pap.title}}</a>
+                                </td>
+                                <td>{{pap.score*100| number : '1.2-2'}}%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

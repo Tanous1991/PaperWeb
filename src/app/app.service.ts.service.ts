@@ -10,24 +10,32 @@ export class PaperService {
 
     constructor(private http: Http) { }
 
-    getPaper():Observable<any[]> {
-        return this.http.get(this.url)
-            .map((res: Response) => <any[]>res.json());
+    getPaper(list: String):Promise<any[]> {
+        var headers = new Headers();
+        headers.append("Accept", 'application/json');
+        headers.append('Content-Type', 'application/json');
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.post(this.url+"/list", JSON.stringify(list), options)
+            .map((res: Response) => <any[]>res.json())
+            .toPromise();
     }
 
-    searchPaper(mot: String):Observable<any[]> {
+    searchPaper(mot: String):Promise<any[]> {
         var headers = new Headers();
         headers.append("Accept", 'application/json');
         headers.append('Content-Type', 'application/json');
         let options = new RequestOptions({ headers: headers });
 
         return this.http.post(this.url, JSON.stringify(mot), options)
-            .map((res: Response) => <any[]>res.json());
+            .map((res: Response) => <any[]>res.json())
+            .toPromise();
     }
 
-    getPaperById(id: String):Observable<any[]> {
+    getPaperById(id: String):Promise<any> {
         return this.http.get(this.url + "/" + id)
-            .map((res: Response) => <any>res.json());
+            .map((res: Response) => <any>res.json())
+            .toPromise();
     }
 
 }
