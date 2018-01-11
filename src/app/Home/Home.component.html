@@ -82,9 +82,9 @@
             <tbody>
               <tr *ngFor="let pap  of papers">
                 <td>
-                  <a (click)="detail(pap.id)">{{pap.title}}</a>
+                  <a routerLink="/detail/{{pap.id}}" routerLinkActive="active">{{pap.title}}</a>
                 </td>
-                <td>{{pap.score*100| number : '1.2-2'}}%</td>
+                <td>{{pap.score*10| number : '1.2-2'}}%</td>
               </tr>
             </tbody>
           </table>

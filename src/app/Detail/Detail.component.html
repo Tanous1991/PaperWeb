@@ -5,18 +5,15 @@
                 <H3>
                     {{paper.title}}
                 </H3>
-                <table>
-                    <tr>
-                        <td>Auteur:</td>
-                    </tr>
-                    <tr *ngFor="let auth of paper.authors">
-                        <td>
-                            - {{auth.name}}
-                        </td>
-                    </tr>
-                </table>
+                <p>Auteur:</p>
+                <ul>
+                    <li *ngFor="let auth of paper.authors | slice:0:limit2">{{auth.name}}</li>
+                    <li class="btn btn-link" (click)="showmore(2)"> {{show2}} </li>
+                </ul>
                 <p>Abstract :</p>
-                <p>{{paper.paperAbstract}}</p>
+                <p>
+                    {{paper.paperAbstract | slice:0:limit1}} <a class="btn btn-link" (click)="showmore(1)"> {{show1}}</a>
+                </p>
                 <p>
                     <a href="{{paper.s2Url}}">lien de l'article</a>
                 </p>
@@ -54,31 +51,31 @@
     </div>
 
     <div class="panel panel-default" *ngIf="tab1">
-            <div class="panel-body">
-                <div class="card">
-                    <div class="card-header">
-                        <span class="icon-list icons font-2xl d-block mt-4">
-                            &nbsp;
-                            <label>OutCitation List</label>
-                        </span>
-                    </div>
-                    <div class="card-body">
-                        <table class="table table-bordered table-hover">
-                            <thead>
-                                <th>Titre</th>
-                                <th>Score</th>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let pap  of outCitations">
-                                    <td>
-                                        <a (click)="detail(pap.id)">{{pap.title}}</a>
-                                    </td>
-                                    <td>{{pap.score*100| number : '1.2-2'}}%</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+        <div class="panel-body">
+            <div class="card">
+                <div class="card-header">
+                    <span class="icon-list icons font-2xl d-block mt-4">
+                        &nbsp;
+                        <label>OutCitation List</label>
+                    </span>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <th>Titre</th>
+                            <th>Score</th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let pap  of outCitations">
+                                <td>
+                                    <a (click)="detail(pap.id)">{{pap.title}}</a>
+                                </td>
+                                <td>{{pap.score*100| number : '1.2-2'}}%</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
+    </div>
 </div>
