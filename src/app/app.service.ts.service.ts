@@ -7,6 +7,8 @@ import { Observable } from 'rxjs/Observable';
 export class PaperService {
 
     private url: string = "http://localhost:3000/papers";
+    private urlaws: string = "http://ec2-52-208-242-240.eu-west-1.compute.amazonaws.com:3000/papers";
+    
 
     constructor(private http: Http) { }
 
@@ -15,8 +17,9 @@ export class PaperService {
         headers.append("Accept", 'application/json');
         headers.append('Content-Type', 'application/json');
         let options = new RequestOptions({ headers: headers });
-
-        return this.http.post(this.url+"/list", JSON.stringify({list}), options)
+        var tmp = JSON.stringify({list})
+        console.log(tmp);
+        return this.http.post(this.urlaws+"/list", JSON.stringify({list}), options)
             .map((res: Response) => <any[]>res.json())
             .toPromise();
     }
