@@ -16,6 +16,9 @@ export class HomeComponent implements OnInit {
   title = 'app';
   mot: String;
   view : boolean = false ;
+  nbelement : Number = 100;
+  yearelement: Number;
+  sortelement: String;
 
   constructor(private PaperService: PaperService,
     private router: Router) { }

@@ -1,3 +1,5 @@
+import { YearsPipe } from './Home/Years.pipe';
+import { NbElementPipe } from './Home/NbElement.pipe';
 import { PaperService } from './app.service.ts.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -14,7 +16,9 @@ import { DetailComponent } from './Detail/Detail.component';
   declarations: [
     AppComponent,
     HomeComponent,
-    DetailComponent
+    DetailComponent,
+    NbElementPipe,
+    YearsPipe
   ],
   imports: [BrowserModule,
     HttpModule, FormsModule,
