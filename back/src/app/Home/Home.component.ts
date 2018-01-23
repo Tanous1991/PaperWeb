@@ -36,8 +36,4 @@ export class HomeComponent implements OnInit {
       this.view = true;
     }
   }
-  
-  clear(){
-    this.papers = null;
-  }
 }

@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div class="row">
+        <form>
+          <div class="form-group col-xs-10">
+            <input class="form-control" [(ngModel)]="mot" name="mot" type="text" placeholder="Search">
+          </div>
+          <div class="col-xs-2">
+            <button type="submit" class="btn btn-block btn-primary" (click)="search()">
+              <span class="glyphicon glyphicon-search "> Search</span>
+            </button>
+            <button type="button" class="btn btn-block btn-primary" (click)="show=!show">
+              <span class="glyphicon glyphicon-cog"></span> Advanced Search
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <div class="row" *ngIf="show">
+        <div class="container col-xs-10">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <form class="form-inline" role="form">
+                <div class="form-group">
+                  <label class="filter-col" style="margin-right:0;" for="pref-perpage">Rows per page:</label>
+                  <select class="form-control" name="nbelement" [(ngModel)]="nbelement">
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                    <option value="30">30</option>
+                    <option value="40">40</option>
+                    <option value="50">50</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="filter-col" style="margin-right:0;" for="pref-search">Years:</label>
+                  <input class="form-control input-sm" name="yearelement" [(ngModel)]="yearelement">
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default" *ngIf="view">
+    <div class="panel-body">
+      <div class="card">
+        <div class="card-header">
+          <span class="icon-list icons font-2xl d-block mt-4">
+            &nbsp;
+            <label>Resultat</label>
+          </span>
+        </div>
+        <div class="card-body">
+          <table class="table">
+            <thead>
+              <th scope="col">Titre</th>
+              <th>Année</th>
+              <th>Score</th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let pap  of papers | slice:1:nbelement | Years:yearelement">
+                <td>
+                  <a routerLink="/detail/{{pap.id}}" routerLinkActive="active">{{pap.title}}</a>
+                </td>
+                <td>{{pap.year}}</td>
+                <td>{{pap.score*1| number : '1.2-2'}}%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,83 +1,128 @@
 <div class="container">
-  <div class="panel panel-default">
-    <div class="panel-body">
-      <div class="row">
-        <form>
-          <div class="form-group col-xs-10">
-            <input class="form-control" [(ngModel)]="mot" name="mot" type="text" placeholder="Search">
-          </div>
-          <div class="col-xs-2">
-            <button type="submit" class="btn btn-block btn-primary" (click)="search()">
-              <span class="glyphicon glyphicon-search "> Search</span>
-            </button>
-            <button type="button" class="btn btn-block btn-primary" (click)="show=!show">
-              <span class="glyphicon glyphicon-cog"></span> Advanced Search
-            </button>
-          </div>
-        </form>
-      </div>
-
-      <div class="row" *ngIf="show">
-        <div class="container col-xs-10">
-          <div class="panel panel-default">
-            <div class="panel-body">
-              <form class="form-inline" role="form">
-                <div class="form-group">
-                  <label class="filter-col" style="margin-right:0;" for="pref-perpage">Rows per page:</label>
-                  <select class="form-control" name="nbelement" [(ngModel)]="nbelement">
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                    <option value="15">15</option>
-                    <option value="20">20</option>
-                    <option value="30">30</option>
-                    <option value="40">40</option>
-                    <option value="50">50</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label class="filter-col" style="margin-right:0;" for="pref-search">Years:</label>
-                  <input class="form-control input-sm" name="yearelement" [(ngModel)]="yearelement">
-                </div>
-              </form>
+  <div class="row">
+    <div class="col-sm-8 col-sm-offset-2">
+      <div class="wizard-container">
+        <div class="card wizard-card" data-color="green" id="wizard">
+          <form action="" method="">
+            <div class="wizard-header">
+              <h3 class="wizard-title">
+                Research Papers Recommender System </h3>
+              <h5></h5>
+              <h5></h5>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="panel panel-default" *ngIf="view">
-    <div class="panel-body">
-      <div class="card">
-        <div class="card-header">
-          <span class="icon-list icons font-2xl d-block mt-4">
-            &nbsp;
-            <label>Resultat</label>
-          </span>
-        </div>
-        <div class="card-body">
-          <table class="table">
-            <thead>
-              <th scope="col">Titre</th>
-              <th>Année</th>
-              <th>Score</th>
-            </thead>
-            <tbody>
-              <tr *ngFor="let pap  of papers | slice:1:nbelement | Years:yearelement">
-                <td>
-                  <a routerLink="/detail/{{pap.id}}" routerLinkActive="active">{{pap.title}}</a>
-                </td>
-                <td>{{pap.year}}</td>
-                <td>{{pap.score*1| number : '1.2-2'}}%</td>
-              </tr>
-            </tbody>
-          </table>
+            <div class="wizard-navigation">
+              <ul>
+                <li>
+                  <a href="#details" data-toggle="tab" (click)="clear()">Free search</a>
+                </li>
+                <li>
+                  <a href="#captain" data-toggle="tab" (click)="clear()">Advanced search</a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="tab-content">
+              <div class="tab-pane" id="details">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <br>
+                    <h4 class="info-text">Enter a paper abstract:</h4>
+                    <input rows="3" class="form-control" [(ngModel)]="mot" name="mot" type="text" (click)="detail(pap.id)" type='text' name='next'
+                      value='Entrez vos mots-clés : ' />
+                    <div class="pull-right">
+                      <input type="submit" value="Generate recommendations" class="btn btn-success" (click)="search()">
+                    </div>
+                    <div class="col-sm-12">
+                      <h4 class="info-text"> Content similarity </h4>
+                      <table class="table table-bordered">
+                        <thead>
+                          <tr>
+                            <th>Titre</th>
+                            <th>Score</th>
+                            <th>Détails</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let pap of papers">
+                            <td>
+                              {{pap.title}}
+                            </td>
+                            <td>{{pap.score| number : '1.2-4'}}%</td>
+                            <td>
+                              <a (click)="detail(pap.id)">See</a>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="captain">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <br>
+                    <h4 class="info-text">Enter a paper abstract:</h4>
+                    <input rows="3" class="form-control" [(ngModel)]="mot" name="mot" type="text" (click)="detail(pap.id)" type='text' name='next'
+                      value='Entrez vos mots-clés : ' />
+                    <div class="col-sm-12">
+                      <div class="row">
+                        <div class="col-sm-6 form-group">
+                          <label class="filter-col" style="margin-right:0;" for="pref-perpage">Rows per page:</label>
+                          <select class="form-control" name="nbelement" [(ngModel)]="nbelement">
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                            <option value="30">30</option>
+                            <option value="40">40</option>
+                            <option value="50" selected="selected">50</option>
+                          </select>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                          <label class="filter-col" style="margin-right:0;" for="pref-search">Years:</label>
+                          <input class="form-control" name="yearelement" [(ngModel)]="yearelement">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="pull-right">
+                      <input type="submit" value="Generate recommendations" class="btn btn-success" (click)="search()">
+                    </div>
+                    <div class="col-sm-12">
+                      <h4 class="info-text"> Content similarity </h4>
+                      <table class="table table-bordered">
+                        <thead>
+                          <tr>
+                            <th>Titre</th>
+                            <th>Score</th>
+                            <th>Détails</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let pap of papers | slice:1:nbelement | Years:yearelement">
+                            <td>
+                              {{pap.title}}
+                            </td>
+                            <td>{{pap.score| number : '1.2-3'}}%</td>
+                            <td>
+                              <a (click)="detail(pap.id)">See</a>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
