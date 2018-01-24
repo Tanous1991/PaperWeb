@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
   mot: String;
   view : boolean = false ;
   nbelement : Number = 100;
-  yearelement: Number;
+  yearelement: Number = 40;
   sortelement: String;
 
   constructor(private PaperService: PaperService,
@@ -34,10 +34,15 @@ export class HomeComponent implements OnInit {
     await this.PaperService.searchPaper(this.mot).then(resData => this.papers = resData);
     if(this.papers.length > 0){
       this.view = true;
+      console.log("ok");
     }
   }
   
   clear(){
     this.papers = null;
+    this.mot = null;
+    this.yearelement = null;
+    this.nbelement = null;
+    this.view = false;
   }
 }

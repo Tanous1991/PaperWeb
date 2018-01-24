@@ -26,14 +26,16 @@
                 <div class="row">
                   <div class="col-sm-12">
                     <br>
-                    <h4 class="info-text">Enter a paper abstract:</h4>
-                    <input rows="3" class="form-control" [(ngModel)]="mot" name="mot" type="text" (click)="detail(pap.id)" type='text' name='next'
-                      value='Entrez vos mots-clés : ' />
+                    <h4 class="info-text"></h4>
+                    <div class="form-group label-floating">
+                      <label class="control-label">Enter a paper abstract</label>
+                      <input rows="3" class="form-control" [(ngModel)]="mot" name="mot" />
+                    </div>
                     <div class="pull-right">
                       <input type="submit" value="Generate recommendations" class="btn btn-success" (click)="search()">
                     </div>
-                    <div class="col-sm-12">
-                      <h4 class="info-text"> Content similarity </h4>
+                    <div class="col-sm-12" *ngIf="view">
+                      <h3 class="text-center">Content similarity </h3>
                       <table class="table table-bordered">
                         <thead>
                           <tr>
@@ -44,12 +46,12 @@
                         </thead>
                         <tbody>
                           <tr *ngFor="let pap of papers">
-                            <td>
+                            <td class="center">
                               {{pap.title}}
                             </td>
-                            <td>{{pap.score| number : '1.2-4'}}%</td>
+                            <td class="center">{{pap.score| number : '1.2-4'}}%</td>
                             <td>
-                              <a (click)="detail(pap.id)">See</a>
+                              <button class="btn btn-xs" (click)="detail(pap.id)">See</button>
                             </td>
                           </tr>
                         </tbody>
@@ -62,13 +64,14 @@
                 <div class="row">
                   <div class="col-sm-12">
                     <br>
-                    <h4 class="info-text">Enter a paper abstract:</h4>
-                    <input rows="3" class="form-control" [(ngModel)]="mot" name="mot" type="text" (click)="detail(pap.id)" type='text' name='next'
-                      value='Entrez vos mots-clés : ' />
+                    <div class="form-group label-floating">
+                      <label class="control-label">Enter a paper abstract</label>
+                      <input class="form-control" [(ngModel)]="mot" name="mot" />
+                    </div>
                     <div class="col-sm-12">
                       <div class="row">
-                        <div class="col-sm-6 form-group">
-                          <label class="filter-col" style="margin-right:0;" for="pref-perpage">Rows per page:</label>
+                        <div class="col-sm-6 form-group label-floating">
+                          <label class="control-label" style="margin-right:0;" for="pref-perpage">Rows per page:</label>
                           <select class="form-control" name="nbelement" [(ngModel)]="nbelement">
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -83,11 +86,11 @@
                             <option value="20">20</option>
                             <option value="30">30</option>
                             <option value="40">40</option>
-                            <option value="50" selected="selected">50</option>
+                            <option value="50">50</option>
                           </select>
                         </div>
-                        <div class="col-sm-6 form-group">
-                          <label class="filter-col" style="margin-right:0;" for="pref-search">Years:</label>
+                        <div class="col-sm-6 form-group label-floating">
+                          <label class="control-label" style="margin-right:0;" for="pref-search">Years:</label>
                           <input class="form-control" name="yearelement" [(ngModel)]="yearelement">
                         </div>
                       </div>
@@ -95,24 +98,30 @@
                     <div class="pull-right">
                       <input type="submit" value="Generate recommendations" class="btn btn-success" (click)="search()">
                     </div>
-                    <div class="col-sm-12">
-                      <h4 class="info-text"> Content similarity </h4>
+                    <div class="col-sm-12" *ngIf="view">
+                      <h3 class="text-center">Content similarity </h3>
                       <table class="table table-bordered">
                         <thead>
                           <tr>
                             <th>Titre</th>
                             <th>Score</th>
+                            <th>Year</th>
                             <th>Détails</th>
                           </tr>
                         </thead>
                         <tbody>
                           <tr *ngFor="let pap of papers | slice:1:nbelement | Years:yearelement">
-                            <td>
+                            <td class="center">
                               {{pap.title}}
                             </td>
-                            <td>{{pap.score| number : '1.2-3'}}%</td>
+                            <td class="center">
+                              {{pap.year}}
+                            </td>
+                            <td class="center">
+                              {{pap.score| number : '1.2-3'}}%
+                            </td>
                             <td>
-                              <a (click)="detail(pap.id)">See</a>
+                              <button class="btn btn-link" (click)="detail(pap.id)">See</button>
                             </td>
                           </tr>
                         </tbody>

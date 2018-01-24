@@ -8,12 +8,12 @@
                 <p>Auteur:</p>
                 <ul>
                     <li *ngFor="let auth of paper.authors | slice:0:limit2">{{auth.name}}</li>
-                    <li class="btn btn-link" (click)="showmore(2)"> {{show2}} </li>
+                    <a (click)="showmore(2)"><u> {{show2}} </u></a>
                 </ul>
                 <p>Abstract :</p>
                 <p>
                     {{paper.paperAbstract | slice:0:limit1}}
-                    <a class="btn btn-link" (click)="showmore(1)"> {{show1}}</a>
+                    <a (click)="showmore(1)"><u> {{show1}} </u></a>
                 </p>
                 <p>
                     <a href="{{paper.s2Url}}">lien de l'article</a>
@@ -30,11 +30,11 @@
                         <div class="card-header">
                             <span class="icon-list icons font-2xl d-block mt-4">
                                 &nbsp;
-                                <label>InCitation List</label>
+                                <h4 class="text-center">InCitation List</h4>
                             </span>
                         </div>
                         <div class="card-body">
-                            <table class="table table-bordered table-hover">
+                            <table class="table table-bordered">
                                 <thead>
                                     <th class="text-center">Titre</th>
                                 </thead>
@@ -56,11 +56,11 @@
                         <div class="card-header">
                             <span class="icon-list icons font-2xl d-block mt-4">
                                 &nbsp;
-                                <label class="text-center">OutCitation List</label>
+                                <h4 class="text-center">OutCitation List</h4>
                             </span>
                         </div>
                         <div class="card-body">
-                            <table class="table table-bordered table-hover">
+                            <table class="table table-bordered">
                                 <thead>
                                     <th class="text-center">Titre</th>
                                 </thead>

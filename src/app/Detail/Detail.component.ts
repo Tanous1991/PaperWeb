@@ -2,7 +2,8 @@ import { PaperService } from './../app.service.ts.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { PlatformLocation } from '@angular/common'
+import { Location } from '@angular/common'
+
 
 
 @Component({
@@ -26,12 +27,7 @@ export class DetailComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private PaperService: PaperService,
-    private location: PlatformLocation,
-    private router: Router) {
-    location.onPopState(() => {
-      console.log('pressed back!');
-    });
-  }
+    private router: Router) {}
 
   ngOnInit() {
     this.route.params.subscribe(res => this.id = res.id);
@@ -75,6 +71,7 @@ export class DetailComponent implements OnInit {
 
   detail(id: Number) {
     this.router.navigate(['detail/' + id]);
+    window.location.reload();
   }
 
   showmore(x: String) {

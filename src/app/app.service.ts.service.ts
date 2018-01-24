@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/Observable';
 export class PaperService {
 
     private url: string = "http://localhost:3000/papers";
-    private urlaws: string = "http://ec2-52-208-242-240.eu-west-1.compute.amazonaws.com:3000/papers";
+    private urlaws: string = "http://ec2-34-250-233-126.eu-west-1.compute.amazonaws.com:3000/papers";
     
 
     constructor(private http: Http) { }
